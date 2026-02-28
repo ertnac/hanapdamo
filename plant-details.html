@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KuHALAMAN - Plant Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = { theme: { extend: { colors: { 'leaf-dark': '#243b27', 'leaf': '#4a7553', 'leaf-light': '#dce7df', 'earth': '#f5f6f2', 'accent': '#d66a43' }, fontFamily: { sans: ['Poppins', 'sans-serif'], serif: ['Playfair Display', 'serif'] } } } }
+    </script>
+    <style>
+        * {
+            -webkit-tap-highlight-color: transparent;
+            scroll-behavior: smooth;
+        }
+
+        .tap-effect:active {
+            transform: scale(0.96);
+            transition: transform 0.1s;
+        }
+
+        .page-enter {
+            animation: fadeSlide 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .shadow-soft {
+            box-shadow: 0 10px 30px -5px rgba(36, 59, 39, 0.08);
+        }
+
+        /* Tab Transitions */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 min-h-screen flex items-center justify-center py-10 font-sans">
+
+    <div
+        class="relative w-[393px] h-[852px] bg-earth rounded-[50px] overflow-hidden shadow-2xl border-[8px] border-black flex flex-col page-enter">
+
+        <!-- Status Bar -->
+        <div
+            class="absolute top-0 w-full flex justify-between items-center px-8 pt-4 z-50 text-[15px] font-semibold tracking-tight text-white drop-shadow-md pointer-events-none">
+            <span>9:41</span>
+            <div class="flex space-x-2 items-center"><i class="fas fa-signal text-xs"></i><i
+                    class="fas fa-wifi text-xs"></i><i class="fas fa-battery-full text-sm"></i></div>
+        </div>
+
+        <!-- Hero Image Header -->
+        <div class="h-[45%] w-full relative">
+            <button
+                class="absolute top-14 left-6 z-50 w-10 h-10 bg-black/30 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/20 tap-effect"
+                onclick="window.history.back();">
+                <i class="fas fa-chevron-left text-sm"></i>
+            </button>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBzIHpk8kLFkY-fK8ZgU9Ukz_LZicGRSFVWQ&s"
+                class="w-full h-full object-cover">
+        </div>
+
+        <!-- Overlapping Content -->
+        <div
+            class="flex-1 bg-earth -mt-12 rounded-t-[40px] relative z-20 flex flex-col shadow-[0_-10px_40px_rgba(0,0,0,0.1)]">
+
+            <!-- Title & Badges -->
+            <div class="px-6 pt-8 pb-4">
+                <div class="flex justify-between items-start mb-1">
+                    <h1 class="text-3xl font-serif font-bold text-leaf-dark">Lagundi</h1>
+                    <button
+                        class="w-10 h-10 bg-white rounded-full shadow-soft flex items-center justify-center text-gray-400 tap-effect text-lg"
+                        onclick="this.classList.toggle('text-leaf'); this.querySelector('i').classList.toggle('far'); this.querySelector('i').classList.toggle('fas');"><i
+                            class="far fa-bookmark"></i></button>
+                </div>
+                <p class="text-gray-500 italic text-sm mb-4">Vitex negundo</p>
+
+                <div class="flex items-center gap-2 mb-4">
+                    <span
+                        class="bg-leaf/10 text-leaf text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-widest flex items-center gap-1 border border-leaf/20"><i
+                            class="fas fa-check-circle"></i> DOH Verified</span>
+                    <span
+                        class="bg-white border border-gray-200 text-gray-600 text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-widest shadow-sm">Respiratory</span>
+                </div>
+                <p class="text-[13px] text-gray-600 font-medium leading-relaxed">A proven bronchodilator officially
+                    recognized by the Department of Health for relieving coughs and asthma.</p>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="px-6 mb-4">
+                <div
+                    class="flex overflow-x-auto gap-1 no-scrollbar bg-white p-1 rounded-full shadow-soft border border-gray-100">
+                    <button
+                        class="tab-btn active bg-leaf-dark text-white rounded-full flex-1 py-2 text-xs font-bold transition tap-effect"
+                        onclick="switchTab('desc', this)">Details</button>
+                    <button
+                        class="tab-btn text-gray-500 rounded-full flex-1 py-2 text-xs font-semibold transition tap-effect"
+                        onclick="switchTab('prep', this)">Prep</button>
+                    <!-- Compare Tab Highlighted -->
+                    <button
+                        class="tab-btn text-accent bg-orange-50 rounded-full flex-1 py-2 text-xs font-bold transition tap-effect border border-orange-100 flex items-center justify-center gap-1"
+                        onclick="switchTab('compare', this)"><i class="fas fa-balance-scale text-[10px]"></i>
+                        Compare</button>
+                </div>
+            </div>
+
+            <!-- Tab Contents -->
+            <div class="px-6 flex-1 overflow-y-auto no-scrollbar pb-10">
+
+                <!-- Description Tab -->
+                <div id="desc" class="tab-content active text-sm text-gray-700 font-medium space-y-4">
+                    <p>Lagundi is a large native shrub that grows in the Philippines. It is easily identifiable by its
+                        five-pointed leaves which fan out like a hand.</p>
+                    <div class="bg-white p-4 rounded-2xl shadow-soft border border-gray-100">
+                        <h4 class="font-bold text-leaf-dark mb-2 text-xs uppercase tracking-wider"><i
+                                class="fas fa-heartbeat text-leaf mr-1"></i> Health Benefits</h4>
+                        <ul class="list-disc pl-4 space-y-1 text-gray-600 text-xs">
+                            <li>Relieves chronic coughs</li>
+                            <li>Helps manage asthma</li>
+                            <li>Reduces fever and cold symptoms</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Preparation Tab -->
+                <div id="prep" class="tab-content text-sm text-gray-700 font-medium space-y-4">
+                    <div class="bg-white p-4 rounded-2xl shadow-soft border border-gray-100">
+                        <h4 class="font-bold text-leaf-dark mb-3 text-xs uppercase tracking-wider"><i
+                                class="fas fa-mug-hot text-leaf mr-1"></i> Decoction Method</h4>
+                        <ol class="list-decimal pl-4 space-y-2 text-gray-600 text-xs">
+                            <li>Wash half cup of chopped fresh leaves.</li>
+                            <li>Boil in 2 cups of water for 15 minutes.</li>
+                            <li>Let it cool and strain.</li>
+                            <li>Drink half cup 3 times a day.</li>
+                        </ol>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-2xl border border-red-100">
+                        <h4 class="font-bold text-red-700 mb-1 text-xs"><i class="fas fa-exclamation-triangle mr-1"></i>
+                            Safety Precaution</h4>
+                        <p class="text-red-600 text-xs">Do not rely on this for severe asthma attacks. Consult a doctor
+                            if symptoms persist.</p>
+                    </div>
+                </div>
+
+                <!-- Compare Tab (The Magic Feature) -->
+                <div id="compare" class="tab-content">
+                    <div class="mb-4">
+                        <h3 class="font-bold text-gray-800 text-sm tracking-tight mb-1">Look-Alike Alert</h3>
+                        <p class="text-xs text-gray-500 font-medium">Verify your plant against common look-alikes to
+                            ensure safety.</p>
+                    </div>
+
+                    <!-- Similar Plant Card -->
+                    <div class="bg-white rounded-[24px] p-3 flex gap-4 items-center shadow-soft border-2 border-orange-200 mb-4 tap-effect cursor-pointer group"
+                        onclick="window.location.href='compare.html'">
+                        <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
+                            class="w-16 h-16 rounded-[16px] object-cover group-hover:scale-105 transition">
+                        <div class="flex-1">
+                            <h4 class="text-leaf-dark font-bold text-sm">Vitex trifolia</h4>
+                            <p class="text-gray-500 text-[10px] font-medium leading-tight mt-0.5">Often mistaken for
+                                Lagundi due to similar purple flowers.</p>
+                        </div>
+                        <div
+                            class="w-10 h-10 rounded-full bg-accent text-white flex items-center justify-center shadow-md">
+                            <i class="fas fa-columns text-sm"></i>
+                        </div>
+                    </div>
+
+                    <div class="relative flex py-4 items-center">
+                        <div class="flex-grow border-t border-gray-300"></div>
+                        <span class="flex-shrink-0 mx-4 text-gray-400 text-xs font-medium">OR</span>
+                        <div class="flex-grow border-t border-gray-300"></div>
+                    </div>
+
+                    <button
+                        class="w-full bg-white border-2 border-leaf/30 text-leaf-dark font-bold rounded-2xl py-3.5 shadow-sm tap-effect flex items-center justify-center gap-2"
+                        onclick="window.location.href='library.html'">
+                        <i class="fas fa-search"></i> Select plant from Library
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <div
+            class="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[5px] bg-black/20 rounded-full z-50 pointer-events-none">
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabId, btnElement) {
+            // Reset all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = "tab-btn text-gray-500 rounded-full flex-1 py-2 text-xs font-semibold transition tap-effect";
+            });
+            // Set active button
+            btnElement.className = "tab-btn active bg-leaf-dark text-white rounded-full flex-1 py-2 text-xs font-bold transition tap-effect";
+
+            // Re-apply special styles if Compare is clicked
+            if (tabId === 'compare') {
+                btnElement.className = "tab-btn active bg-accent text-white rounded-full flex-1 py-2 text-xs font-bold transition tap-effect shadow-md flex items-center justify-center gap-1";
+                btnElement.innerHTML = '<i class="fas fa-balance-scale text-[10px]"></i> Compare';
+            } else {
+                // Restore the Compare button to idle state
+                const compareBtn = document.querySelector('button[onclick="switchTab(\'compare\', this)"]');
+                if (compareBtn && btnElement !== compareBtn) {
+                    compareBtn.className = "tab-btn text-accent bg-orange-50 rounded-full flex-1 py-2 text-xs font-bold transition tap-effect border border-orange-100 flex items-center justify-center gap-1";
+                }
+            }
+
+            // Switch content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
+</body>
+
+</html>
