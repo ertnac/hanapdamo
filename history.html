@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanap Damo - History</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'leaf-dark': '#243b27',
+                        'leaf': '#4a7553',
+                        'leaf-light': '#dce7df',
+                        'earth': '#f5f6f2',
+                        'accent': '#d66a43'
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'], // Poppins as the only font
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            -webkit-tap-highlight-color: transparent;
+            scroll-behavior: smooth;
+        }
+
+        .tap-effect:active {
+            transform: scale(0.96);
+            transition: transform 0.1s;
+        }
+
+        .page-enter {
+            animation: fadeSlide 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .shadow-soft {
+            box-shadow: 0 10px 30px -5px rgba(36, 59, 39, 0.08);
+        }
+
+        .swipeable-card {
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .swiped-left {
+            transform: translateX(-100px);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 min-h-screen flex items-center justify-center py-10 font-sans">
+
+    <!-- Device Frame -->
+    <div
+        class="relative w-[393px] h-[852px] bg-earth rounded-[50px] overflow-hidden shadow-2xl border-[8px] border-black flex flex-col page-enter">
+
+        <!-- Status Bar -->
+        <div
+            class="absolute top-0 w-full flex justify-between items-center px-8 pt-4 z-50 text-[15px] font-semibold tracking-tight text-gray-800 pointer-events-none">
+            <span>9:41</span>
+            <div class="flex space-x-2 items-center"><i class="fas fa-signal text-xs"></i><i
+                    class="fas fa-wifi text-xs"></i><i class="fas fa-battery-full text-sm"></i></div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto no-scrollbar pb-32">
+
+            <!-- Header -->
+            <div class="pt-16 pb-4 px-6 relative z-20">
+                <div class="mb-6">
+                    <p class="text-leaf font-bold text-[10px] uppercase tracking-[0.2em] mb-1">Your Activity</p>
+                    <h1 class="text-leaf-dark font-bold text-3xl">Scan History</h1>
+                </div>
+
+                <!-- Filter Chips -->
+                <div class="flex gap-2 overflow-x-auto no-scrollbar pb-2" id="filterChips">
+                    <button
+                        class="chip bg-leaf-dark text-white px-5 py-2 rounded-full text-[11px] font-bold whitespace-nowrap shadow-md transition"
+                        onclick="selectChip(this)">All Scans</button>
+                    <button
+                        class="chip bg-white text-gray-500 border border-gray-100 px-5 py-2 rounded-full text-[11px] font-bold whitespace-nowrap hover:bg-leaf-light transition"
+                        onclick="selectChip(this)">High Match</button>
+                    <button
+                        class="chip bg-white text-gray-500 border border-gray-100 px-5 py-2 rounded-full text-[11px] font-bold whitespace-nowrap hover:bg-leaf-light transition"
+                        onclick="selectChip(this)">Favorites</button>
+                </div>
+            </div>
+
+            <div class="px-6 space-y-4">
+                <!-- Date Header -->
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-1">Today</p>
+
+                <!-- History Card 1 -->
+                <div class="bg-white rounded-[28px] p-3 flex gap-4 items-center shadow-soft border border-white tap-effect cursor-pointer group"
+                    onclick="openCompareModal()">
+                    <div class="relative">
+                        <img src="https://www.pchrd.dost.gov.ph/wp-content/uploads/2022/04/tsaanggubat2.jpg"
+                            class="w-20 h-20 rounded-2xl object-cover shadow-sm">
+                        <div
+                            class="absolute -top-1 -right-1 bg-green-500 w-4 h-4 rounded-full border-2 border-white flex items-center justify-center">
+                            <i class="fas fa-check text-white text-[6px]"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-leaf-dark font-bold text-base leading-none">Lagundi</h4>
+                            <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-lg">98%
+                                Match</span>
+                        </div>
+                        <p class="text-gray-400 text-[10px] mt-2 font-medium"><i
+                                class="fas fa-map-marker-alt text-accent mr-1"></i> San Pablo, Laguna</p>
+                        <p class="text-leaf text-[9px] font-bold uppercase mt-1">Cough & Asthma</p>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-earth flex items-center justify-center text-leaf"><i
+                            class="fas fa-chevron-right text-[10px]"></i></div>
+                </div>
+
+                <!-- Date Header -->
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-1 mt-6">Yesterday</p>
+
+                <!-- Swipeable History Card -->
+                <div class="relative rounded-[28px] overflow-hidden group">
+                    <!-- Action Buttons (Behind Card) -->
+                    <div class="absolute inset-y-0 right-0 flex items-center gap-2 pr-4 z-0">
+                        <button
+                            class="w-10 h-10 rounded-full bg-white text-leaf shadow-soft tap-effect flex items-center justify-center">
+                            <i class="far fa-bookmark text-xs"></i>
+                        </button>
+                        <button onclick="deleteCard()"
+                            class="w-10 h-10 rounded-full bg-red-50 text-red-500 shadow-soft tap-effect flex items-center justify-center">
+                            <i class="far fa-trash-alt text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- The Card -->
+                    <div id="dragCard"
+                        class="swipeable-card bg-white rounded-[28px] p-3 flex gap-4 items-center shadow-soft border border-white relative z-10 cursor-grab active:cursor-grabbing">
+                        <img src="https://www.pchrd.dost.gov.ph/wp-content/uploads/2022/04/tsaanggubat2.jpg"
+                            class="w-20 h-20 rounded-2xl object-cover shadow-sm pointer-events-none">
+                        <div class="flex-1 pointer-events-none">
+                            <div class="flex justify-between items-start">
+                                <h4 class="text-leaf-dark font-bold text-base leading-none">Tsaang Gubat</h4>
+                                <span
+                                    class="text-[10px] font-bold text-yellow-600 bg-yellow-50 px-2 py-0.5 rounded-lg">76%
+                                    Match</span>
+                            </div>
+                            <p class="text-gray-400 text-[10px] mt-2 font-medium"><i
+                                    class="fas fa-map-marker-alt text-accent mr-1"></i> My Backyard</p>
+                            <p class="text-leaf text-[9px] font-bold uppercase mt-1">Stomach Pain</p>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-center text-gray-300 text-[10px] italic mt-2">Swipe left to bookmark or delete</p>
+            </div>
+        </div>
+
+        <!-- Floating Modern Bottom Navigation -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-[90%] z-40">
+            <div
+                class="bg-white/90 backdrop-blur-xl shadow-[0_20px_40px_-10px_rgba(36,59,39,0.15)] rounded-full h-16 flex justify-around items-center px-2 border border-white">
+                <a href="home.html"
+                    class="tap-effect flex flex-col items-center flex-1 text-gray-400 hover:text-leaf transition">
+                    <i class="fas fa-home text-lg"></i>
+                </a>
+                <a href="library.html"
+                    class="tap-effect flex flex-col items-center flex-1 text-gray-400 hover:text-leaf transition">
+                    <i class="fas fa-book-open text-lg"></i>
+                </a>
+
+                <div class="relative flex-1 flex justify-center">
+                    <a href="scan.html"
+                        class="tap-effect absolute -top-10 w-16 h-16 bg-gradient-to-tr from-leaf-dark to-leaf rounded-full shadow-[0_10px_20px_rgba(74,117,83,0.3)] flex items-center justify-center border-4 border-earth cursor-pointer">
+                        <i class="fas fa-camera text-white text-xl"></i>
+                    </a>
+                </div>
+
+                <a href="history.html" class="tap-effect flex flex-col items-center flex-1 text-leaf-dark transition">
+                    <i class="fas fa-history text-xl"></i>
+                    <div class="w-1 h-1 bg-leaf-dark mt-1 rounded-full"></div>
+                </a>
+                <a href="profile.html"
+                    class="tap-effect flex flex-col items-center flex-1 text-gray-400 hover:text-leaf transition">
+                    <i class="far fa-user text-lg"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Modern Comparison Modal -->
+        <div id="compareModal"
+            class="absolute inset-0 bg-leaf-dark/40 backdrop-blur-md z-[100] hidden flex flex-col justify-end transition-opacity duration-300">
+            <div id="compareBox"
+                class="bg-earth w-full rounded-t-[40px] px-6 pt-10 pb-12 translate-y-full transition-transform duration-500">
+                <div class="w-12 h-1.5 bg-leaf-light rounded-full mx-auto mb-8"></div>
+
+                <div class="flex justify-between items-center mb-8">
+                    <h3 class="text-leaf-dark font-bold text-2xl">Result Analysis</h3>
+                    <button onclick="closeCompareModal()"
+                        class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-leaf-dark shadow-sm">
+                        <i class="fas fa-times text-xs"></i>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mb-8">
+                    <div class="space-y-3">
+                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest text-center">Your
+                            Capture</p>
+                        <div class="aspect-square rounded-[24px] overflow-hidden border-2 border-white shadow-soft">
+                            <img src="https://www.pchrd.dost.gov.ph/wp-content/uploads/2022/04/tsaanggubat2.jpg"
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <p class="text-[10px] font-bold text-leaf uppercase tracking-widest text-center">Verified Match
+                        </p>
+                        <div class="aspect-square rounded-[24px] overflow-hidden border-4 border-leaf shadow-soft">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBzIHpk8kLFkY-fK8ZgU9Ukz_LZicGRSFVWQ&s"
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-[24px] p-5 mb-8 shadow-soft">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-2 h-2 rounded-full bg-leaf"></div>
+                        <p class="text-leaf-dark font-bold text-sm">Match Confidence: 98.4%</p>
+                    </div>
+                    <p class="text-gray-500 text-[11px] leading-relaxed">Leaf structure and venation patterns match 100%
+                        with Vitex negundo (Lagundi) database standards.</p>
+                </div>
+
+                <button onclick="window.location.href='library.html'"
+                    class="w-full bg-leaf-dark text-white py-4 rounded-2xl font-bold shadow-lg shadow-leaf-dark/20 tap-effect">View
+                    Full Guide</button>
+            </div>
+        </div>
+
+        <!-- iPhone Home Indicator -->
+        <div
+            class="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[5px] bg-gray-300 rounded-full z-[60] pointer-events-none">
+        </div>
+    </div>
+
+    <script>
+        // Filter Selection
+        function selectChip(clickedBtn) {
+            document.querySelectorAll('.chip').forEach(btn => {
+                btn.className = "chip bg-white text-gray-500 border border-gray-100 px-5 py-2 rounded-full text-[11px] font-bold whitespace-nowrap hover:bg-leaf-light transition";
+            });
+            clickedBtn.className = "chip bg-leaf-dark text-white px-5 py-2 rounded-full text-[11px] font-bold whitespace-nowrap shadow-md transition";
+        }
+
+        // Modal Logic
+        const compareModal = document.getElementById('compareModal');
+        const compareBox = document.getElementById('compareBox');
+
+        function openCompareModal() {
+            compareModal.classList.remove('hidden');
+            setTimeout(() => {
+                compareBox.classList.remove('translate-y-full');
+            }, 10);
+        }
+
+        function closeCompareModal() {
+            compareBox.classList.add('translate-y-full');
+            setTimeout(() => {
+                compareModal.classList.add('hidden');
+            }, 500);
+        }
+
+        // Swipe Functionality
+        const card = document.getElementById('dragCard');
+        let startX = 0;
+        let isDragging = false;
+
+        card.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            card.style.transition = 'none';
+        });
+
+        card.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            let diff = e.touches[0].clientX - startX;
+            if (diff < 0 && diff > -120) card.style.transform = `translateX(${diff}px)`;
+        });
+
+        card.addEventListener('touchend', (e) => {
+            isDragging = false;
+            card.style.transition = 'transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            if (e.changedTouches[0].clientX - startX < -60) {
+                card.classList.add('swiped-left');
+                card.style.transform = '';
+            } else {
+                card.classList.remove('swiped-left');
+                card.style.transform = 'translateX(0)';
+            }
+        });
+
+        function deleteCard() {
+            const container = card.parentElement;
+            container.style.transition = 'all 0.4s ease';
+            container.style.opacity = '0';
+            container.style.transform = 'scale(0.9)';
+            setTimeout(() => container.remove(), 400);
+        }
+    </script>
+</body>
+
+</html>

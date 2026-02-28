@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanap Damo - Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'leaf-dark': '#243b27',
+                        'leaf': '#4a7553',
+                        'leaf-light': '#dce7df',
+                        'earth': '#f5f6f2',
+                        'accent': '#d66a43'
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .tap-effect:active {
+            transform: scale(0.97);
+            transition: transform 0.1s;
+        }
+
+        .page-enter {
+            animation: fadeSlideUp 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .loader {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 min-h-screen flex items-center justify-center py-10 font-sans">
+
+    <!-- Device Frame -->
+    <div
+        class="relative w-[393px] h-[852px] bg-earth rounded-[50px] overflow-hidden shadow-2xl border-[8px] border-black page-enter">
+
+        <!-- Status Bar -->
+        <div
+            class="absolute top-0 w-full flex justify-between items-center px-8 pt-4 z-50 text-[15px] font-semibold tracking-tight text-leaf-dark">
+            <span>9:41</span>
+            <div class="flex space-x-2 items-center">
+                <i class="fas fa-signal text-xs"></i><i class="fas fa-wifi text-xs"></i><i
+                    class="fas fa-battery-full text-sm"></i>
+            </div>
+        </div>
+
+        <!-- Top Branding Section -->
+        <div class="absolute inset-x-0 top-0 h-[30%] flex flex-col items-center justify-center bg-earth z-10">
+            <div
+                class="w-20 h-20 rounded-full flex items-center justify-center shadow-md bg-white border-2 border-leaf-light p-1 mb-3">
+                <img src="hanapdamo.png" alt="Logo" class="w-full h-full object-cover rounded-full">
+            </div>
+            <h1 class="text-leaf-dark text-2xl font-serif font-bold">Hanap Damo</h1>
+            <p class="text-leaf/60 text-[11px] font-semibold uppercase tracking-widest mt-1">Start your journey</p>
+        </div>
+
+        <!-- Registration Sheet -->
+        <div
+            class="absolute inset-x-0 bottom-0 h-[72%] bg-white rounded-t-[45px] px-8 pt-10 pb-10 flex flex-col z-20 shadow-[0_-15px_40px_rgba(36,59,39,0.08)]">
+
+            <!-- Handle bar -->
+            <div class="w-12 h-1.5 bg-leaf-light/40 rounded-full mx-auto mb-8"></div>
+
+            <!-- Lowered Header using white space -->
+            <div class="mb-8">
+                <p class="text-leaf font-bold text-[10px] uppercase tracking-[0.2em] mb-1">Join the community</p>
+                <h2 class="text-3xl font-serif font-bold text-leaf-dark">Create Account</h2>
+            </div>
+
+            <form class="flex flex-col flex-1">
+                <!-- Registration Fields -->
+                <div class="space-y-4 mb-8">
+                    <div class="relative">
+                        <span class="absolute left-5 top-1/2 -translate-y-1/2 text-leaf/40 text-sm">
+                            <i class="far fa-user"></i>
+                        </span>
+                        <input type="text" placeholder="Full Name"
+                            class="w-full bg-earth rounded-2xl py-4 pl-12 pr-6 text-[13px] outline-none text-gray-700 placeholder-gray-400 focus:ring-1 focus:ring-leaf/30 transition font-medium">
+                    </div>
+
+                    <div class="relative">
+                        <span class="absolute left-5 top-1/2 -translate-y-1/2 text-leaf/40 text-sm">
+                            <i class="far fa-envelope"></i>
+                        </span>
+                        <input type="email" placeholder="Email Address"
+                            class="w-full bg-earth rounded-2xl py-4 pl-12 pr-6 text-[13px] outline-none text-gray-700 placeholder-gray-400 focus:ring-1 focus:ring-leaf/30 transition font-medium">
+                    </div>
+
+                    <div class="relative">
+                        <span class="absolute left-5 top-1/2 -translate-y-1/2 text-leaf/40 text-sm">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                        <input type="password" id="regPwd" placeholder="Create Password"
+                            class="w-full bg-earth rounded-2xl py-4 pl-12 pr-14 text-[13px] outline-none text-gray-700 placeholder-gray-400 focus:ring-1 focus:ring-leaf/30 transition font-medium tracking-widest">
+                        <button type="button" onclick="toggleRegPwd()"
+                            class="absolute right-4 top-1/2 -translate-y-1/2 text-leaf/50 tap-effect p-2">
+                            <i class="far fa-eye" id="eyeIcon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sign Up Button -->
+                <button type="button" onclick="doRegister(this)"
+                    class="tap-effect w-full bg-leaf-dark text-white rounded-2xl py-4 font-semibold shadow-lg shadow-leaf-dark/20 hover:bg-leaf transition-all duration-300 relative h-[58px] flex items-center justify-center">
+                    <span id="regBtnText">Create Account</span>
+                    <div class="loader" id="regBtnLoader"></div>
+                </button>
+
+                <!-- Alternative Methods -->
+                <div class="flex items-center my-6">
+                    <div class="flex-grow h-[1px] bg-gray-100"></div>
+                    <span class="px-4 text-[9px] text-gray-400 font-bold uppercase tracking-widest">or sign up
+                        with</span>
+                    <div class="flex-grow h-[1px] bg-gray-100"></div>
+                </div>
+
+                <div class="flex gap-4 mb-6">
+                    <button type="button"
+                        class="tap-effect flex-1 flex items-center justify-center gap-3 bg-white border border-gray-100 py-3 rounded-2xl shadow-sm hover:bg-gray-50 transition">
+                        <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-4 h-4">
+                        <span class="text-[11px] font-bold text-gray-600">Google</span>
+                    </button>
+                    <button type="button"
+                        class="tap-effect flex-1 flex items-center justify-center gap-3 bg-white border border-gray-100 py-3 rounded-2xl shadow-sm hover:bg-gray-50 transition">
+                        <i class="fab fa-apple text-base"></i>
+                        <span class="text-[11px] font-bold text-gray-600">Apple</span>
+                    </button>
+                </div>
+
+                <!-- Footer Link -->
+                <div class="mt-auto text-center">
+                    <p class="text-[13px] text-gray-500 font-medium">
+                        Already a member?
+                        <a href="index.html" class="text-accent font-bold hover:underline ml-1">Login here</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+
+        <!-- iPhone Home Indicator -->
+        <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[5px] bg-gray-200 rounded-full z-50"></div>
+    </div>
+
+    <script>
+        function toggleRegPwd() {
+            const input = document.getElementById('regPwd');
+            const icon = document.getElementById('eyeIcon');
+            if (input.type === 'password') {
+                input.type = 'text'; icon.classList.replace('fa-eye', 'fa-eye-slash');
+                input.classList.remove('tracking-widest');
+            } else {
+                input.type = 'password'; icon.classList.replace('fa-eye-slash', 'fa-eye');
+                input.classList.add('tracking-widest');
+            }
+        }
+
+        function doRegister(btn) {
+            document.getElementById('regBtnText').style.display = 'none';
+            document.getElementById('regBtnLoader').style.display = 'block';
+            setTimeout(() => { window.location.href = 'home.html'; }, 1200);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanap Damo - Scan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script>tailwind.config = { theme: { extend: { colors: { 'brand-green': '#8FBC63', 'brand-dark': '#295C14' }, fontFamily: { sans: ['Inter', 'sans-serif'] } } } }</script>
+    <style>
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .tap-effect:active {
+            transform: scale(0.95);
+            transition: transform 0.1s;
+        }
+
+        .page-enter {
+            animation: zoomIn 0.3s ease-out forwards;
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .scan-line {
+            animation: scan 2.5s ease-in-out infinite;
+        }
+
+        @keyframes scan {
+
+            0%,
+            100% {
+                top: 0;
+            }
+
+            50% {
+                top: 100%;
+            }
+        }
+
+        /* Shutter flash animation */
+        .flash {
+            position: absolute;
+            inset: 0;
+            background-color: white;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .flash.active {
+            animation: cameraFlash 0.5s ease-out forwards;
+        }
+
+        @keyframes cameraFlash {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 min-h-screen flex items-center justify-center py-10 font-sans">
+
+    <div
+        class="relative w-[393px] h-[852px] bg-black rounded-[50px] overflow-hidden shadow-2xl border-[8px] border-black flex flex-col page-enter">
+
+        <!-- Flash Overlay (Triggered by JS) -->
+        <div id="flashOverlay" class="flash"></div>
+
+        <!-- Mock Camera Feed Background -->
+        <!-- Using a plant image as the "camera feed" -->
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')] bg-cover bg-center opacity-90 transition-all duration-1000"
+            id="cameraFeed"></div>
+        <div class="absolute inset-0 bg-black/30 transition-all duration-500" id="cameraDim"></div>
+
+        <!-- Top Controls -->
+        <div class="absolute top-0 w-full flex justify-between items-center px-8 pt-14 z-50 text-white" id="topNav">
+            <button onclick="window.history.back()"
+                class="tap-effect w-10 h-10 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center border border-white/20"><i
+                    class="fas fa-times text-lg"></i></button>
+            <div
+                class="bg-black/40 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 text-xs font-bold tracking-widest uppercase">
+                Identify Plant</div>
+            <button
+                class="tap-effect w-10 h-10 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center border border-white/20"
+                onclick="this.classList.toggle('text-yellow-400')"><i class="fas fa-bolt text-lg"></i></button>
+        </div>
+
+        <!-- Viewfinder Reticle -->
+        <div class="flex-1 flex items-center justify-center relative z-40 px-8" id="viewFinder">
+            <div class="w-full aspect-square relative">
+                <!-- Corner brackets -->
+                <div class="absolute top-0 left-0 w-10 h-10 border-t-4 border-l-4 border-white rounded-tl-2xl"></div>
+                <div class="absolute top-0 right-0 w-10 h-10 border-t-4 border-r-4 border-white rounded-tr-2xl"></div>
+                <div class="absolute bottom-0 left-0 w-10 h-10 border-b-4 border-l-4 border-white rounded-bl-2xl"></div>
+                <div class="absolute bottom-0 right-0 w-10 h-10 border-b-4 border-r-4 border-white rounded-br-2xl">
+                </div>
+
+                <img src="logo.png"
+                    class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 opacity-30 object-contain">
+                <div
+                    class="absolute left-0 w-full h-1 bg-brand-green shadow-[0_0_15px_#8FBC63] scan-line rounded-full z-50">
+                </div>
+            </div>
+            <p class="absolute bottom-20 text-white text-sm font-medium bg-black/50 px-4 py-1.5 rounded-full backdrop-blur-sm"
+                id="statusText">Focus on leaves or flowers</p>
+        </div>
+
+        <!-- Bottom Controls -->
+        <div class="h-40 bg-gradient-to-t from-black via-black/80 to-transparent flex justify-between items-center px-10 pb-8 z-50 transition-opacity duration-300"
+            id="bottomControls">
+            <button class="tap-effect w-12 h-12 rounded-xl bg-black/50 border border-white/30 overflow-hidden relative">
+                <img src="https://images.unsplash.com/photo-1587334274328-64186a80aeb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                    class="w-full h-full object-cover">
+            </button>
+
+            <!-- THE SHUTTER BUTTON (Triggers AI Scan) -->
+            <button
+                class="tap-effect w-20 h-20 rounded-full border-[5px] border-white flex items-center justify-center transition-transform active:scale-90"
+                onclick="takePicture()">
+                <div class="w-[64px] h-[64px] bg-white rounded-full transition-transform active:scale-90"></div>
+            </button>
+
+            <button
+                class="tap-effect w-12 h-12 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center border border-white/30 text-white">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+        </div>
+
+        <!-- Processing AI Loader (Hidden by default) -->
+        <div id="aiLoader" class="absolute inset-0 z-50 flex flex-col items-center justify-center hidden">
+            <div class="w-20 h-20 border-4 border-white/20 border-t-brand-green rounded-full animate-spin mb-4"></div>
+            <h2 class="text-white font-bold text-xl tracking-wide drop-shadow-md">Analyzing Plant...</h2>
+            <p class="text-white/80 text-sm mt-1 font-medium drop-shadow-md">Checking AI Database</p>
+        </div>
+
+        <div
+            class="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[5px] bg-white rounded-full z-[60] pointer-events-none mix-blend-difference">
+        </div>
+    </div>
+
+    <script>
+        function takePicture() {
+            // 1. Trigger Flash
+            const flash = document.getElementById('flashOverlay');
+            flash.classList.add('active');
+
+            // 2. Hide UI Elements to focus on processing
+            document.getElementById('bottomControls').style.opacity = '0';
+            document.getElementById('topNav').style.opacity = '0';
+            document.getElementById('viewFinder').style.opacity = '0';
+
+            // 3. Make the image clearer (remove dim overlay)
+            document.getElementById('cameraDim').style.backgroundColor = 'rgba(0,0,0,0.6)';
+
+            // 4. Show AI Loader
+            setTimeout(() => {
+                document.getElementById('aiLoader').classList.remove('hidden');
+            }, 300);
+
+            // 5. Redirect to Result Page after 2 seconds
+            setTimeout(() => {
+                window.location.href = 'result.html';
+            }, 2000); // 2-second scanning simulation
+        }
+    </script>
+</body>
+
+</html>
