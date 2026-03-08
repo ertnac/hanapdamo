@@ -91,7 +91,7 @@
         </div>
 
         <!-- Hero Image Header -->
-        <div class="h-[45%] w-full relative">
+        <div class="h-[35%] w-full relative shrink-0">
             <button
                 class="absolute top-14 left-6 z-50 w-10 h-10 bg-black/30 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/20 tap-effect"
                 onclick="window.history.back();">
@@ -101,12 +101,12 @@
                 class="w-full h-full object-cover">
         </div>
 
-        <!-- Overlapping Content -->
+        <!-- Overlapping Content Area (ADDED min-h-0 TO FIX SCROLLING) -->
         <div
-            class="flex-1 bg-earth -mt-12 rounded-t-[40px] relative z-20 flex flex-col shadow-[0_-10px_40px_rgba(0,0,0,0.1)]">
+            class="flex-1 min-h-0 bg-earth -mt-10 rounded-t-[40px] relative z-20 flex flex-col shadow-[0_-10px_40px_rgba(0,0,0,0.1)]">
 
-            <!-- Title & Badges -->
-            <div class="px-6 pt-8 pb-4">
+            <!-- Title & Badges (Fixed at top) -->
+            <div class="px-6 pt-8 pb-4 shrink-0">
                 <div class="flex justify-between items-start mb-1">
                     <h1 class="text-3xl font-serif font-bold text-leaf-dark">Lagundi</h1>
                     <button
@@ -114,76 +114,147 @@
                         onclick="this.classList.toggle('text-leaf'); this.querySelector('i').classList.toggle('far'); this.querySelector('i').classList.toggle('fas');"><i
                             class="far fa-bookmark"></i></button>
                 </div>
-                <p class="text-gray-500 italic text-sm mb-4">Vitex negundo</p>
 
-                <div class="flex items-center gap-2 mb-4">
+                <div class="flex items-center gap-2 mt-2 mb-4">
                     <span
                         class="bg-leaf/10 text-leaf text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-widest flex items-center gap-1 border border-leaf/20"><i
                             class="fas fa-check-circle"></i> DOH Verified</span>
-                    <span
-                        class="bg-white border border-gray-200 text-gray-600 text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-widest shadow-sm">Respiratory</span>
                 </div>
-                <p class="text-[13px] text-gray-600 font-medium leading-relaxed">A proven bronchodilator officially
-                    recognized by the Department of Health for relieving coughs and asthma.</p>
             </div>
 
-            <!-- Tab Navigation -->
-            <div class="px-6 mb-4">
+            <!-- Tab Navigation (Fixed below title) -->
+            <div class="px-6 mb-4 shrink-0">
                 <div
                     class="flex overflow-x-auto gap-1 no-scrollbar bg-white p-1 rounded-full shadow-soft border border-gray-100">
                     <button
-                        class="tab-btn active bg-leaf-dark text-white rounded-full flex-1 py-2 text-xs font-bold transition tap-effect"
+                        class="tab-btn active bg-leaf-dark text-white rounded-full flex-1 py-2 text-[11px] font-bold transition tap-effect shadow-md"
                         onclick="switchTab('desc', this)">Details</button>
                     <button
-                        class="tab-btn text-gray-500 rounded-full flex-1 py-2 text-xs font-semibold transition tap-effect"
-                        onclick="switchTab('prep', this)">Prep</button>
-                    <!-- Compare Tab Highlighted -->
+                        class="tab-btn text-gray-500 rounded-full flex-1 py-2 text-[11px] font-semibold transition tap-effect"
+                        onclick="switchTab('research', this)">Research</button>
                     <button
-                        class="tab-btn text-accent bg-orange-50 rounded-full flex-1 py-2 text-xs font-bold transition tap-effect border border-orange-100 flex items-center justify-center gap-1"
+                        class="tab-btn text-accent bg-orange-50 rounded-full flex-1 py-2 text-[11px] font-bold transition tap-effect border border-orange-100 flex items-center justify-center gap-1"
                         onclick="switchTab('compare', this)"><i class="fas fa-balance-scale text-[10px]"></i>
                         Compare</button>
                 </div>
             </div>
 
-            <!-- Tab Contents -->
-            <div class="px-6 flex-1 overflow-y-auto no-scrollbar pb-10">
+            <!-- Tab Contents (ADDED min-h-0 TO FIX SCROLLING) -->
+            <div class="px-6 flex-1 min-h-0 overflow-y-auto no-scrollbar pb-12">
 
-                <!-- Description Tab -->
-                <div id="desc" class="tab-content active text-sm text-gray-700 font-medium space-y-4">
-                    <p>Lagundi is a large native shrub that grows in the Philippines. It is easily identifiable by its
-                        five-pointed leaves which fan out like a hand.</p>
-                    <div class="bg-white p-4 rounded-2xl shadow-soft border border-gray-100">
-                        <h4 class="font-bold text-leaf-dark mb-2 text-xs uppercase tracking-wider"><i
-                                class="fas fa-heartbeat text-leaf mr-1"></i> Health Benefits</h4>
-                        <ul class="list-disc pl-4 space-y-1 text-gray-600 text-xs">
-                            <li>Relieves chronic coughs</li>
-                            <li>Helps manage asthma</li>
-                            <li>Reduces fever and cold symptoms</li>
-                        </ul>
+                <!-- 1. DETAILS TAB -->
+                <div id="desc" class="tab-content active space-y-5">
+
+                    <!-- Fact Sheet Grid -->
+                    <div class="bg-white p-5 rounded-[28px] shadow-soft border border-gray-100 space-y-4">
+                        <div class="flex justify-between items-center border-b border-gray-50 pb-3">
+                            <span class="text-xs text-gray-500 font-medium flex items-center gap-2"><i
+                                    class="fas fa-dna text-leaf/50"></i> Scientific Name</span>
+                            <span class="text-[12px] font-bold text-leaf-dark italic">Vitex negundo</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-gray-50 pb-3">
+                            <span class="text-xs text-gray-500 font-medium flex items-center gap-2"><i
+                                    class="fas fa-map-marker-alt text-leaf/50"></i> Local Name</span>
+                            <span class="text-[12px] font-bold text-leaf-dark">Dangla (Tagalog)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500 font-medium flex items-center gap-2"><i
+                                    class="fas fa-mortar-pestle text-leaf/50"></i> Preparation</span>
+                            <span class="text-[12px] font-bold text-leaf-dark text-right">Decoction, Wash</span>
+                        </div>
+                    </div>
+
+                    <!-- Helpful Plant Facts for the User -->
+                    <div>
+                        <h4 class="font-bold text-leaf-dark mb-3 text-[11px] uppercase tracking-widest"><i
+                                class="fas fa-info-circle text-leaf mr-1"></i> Identification Facts</h4>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div
+                                class="bg-white p-4 rounded-[24px] shadow-soft border border-gray-50 flex flex-col justify-center items-center text-center">
+                                <i class="fas fa-leaf text-leaf/50 mb-2 text-xl"></i>
+                                <p class="text-xs font-bold text-gray-800 mb-1">5-Pointed Leaves</p>
+                                <p class="text-[10px] text-gray-500 leading-tight">Leaves spread out like five fingers
+                                    on a human hand.</p>
+                            </div>
+                            <div
+                                class="bg-white p-4 rounded-[24px] shadow-soft border border-gray-50 flex flex-col justify-center items-center text-center">
+                                <i class="fas fa-seedling text-leaf/50 mb-2 text-xl"></i>
+                                <p class="text-xs font-bold text-gray-800 mb-1">Highly Resilient</p>
+                                <p class="text-[10px] text-gray-500 leading-tight">Thrives natively in both dry grounds
+                                    and swampy areas.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Warnings / Precautions -->
+                    <div class="bg-red-50 p-5 rounded-[28px] border border-red-100 shadow-sm">
+                        <h4 class="font-bold text-red-700 mb-2 text-[11px] uppercase tracking-widest"><i
+                                class="fas fa-exclamation-triangle mr-1"></i> Warnings & Precautions</h4>
+                        <p class="text-red-600 text-[11px] font-medium leading-relaxed">Do not rely on this herb for
+                            severe asthma attacks or respiratory emergencies. If symptoms persist for more than a week,
+                            consult a medical professional immediately.</p>
                     </div>
                 </div>
 
-                <!-- Preparation Tab -->
-                <div id="prep" class="tab-content text-sm text-gray-700 font-medium space-y-4">
-                    <div class="bg-white p-4 rounded-2xl shadow-soft border border-gray-100">
-                        <h4 class="font-bold text-leaf-dark mb-3 text-xs uppercase tracking-wider"><i
-                                class="fas fa-mug-hot text-leaf mr-1"></i> Decoction Method</h4>
-                        <ol class="list-decimal pl-4 space-y-2 text-gray-600 text-xs">
-                            <li>Wash half cup of chopped fresh leaves.</li>
-                            <li>Boil in 2 cups of water for 15 minutes.</li>
-                            <li>Let it cool and strain.</li>
-                            <li>Drink half cup 3 times a day.</li>
-                        </ol>
+                <!-- 2. RESEARCH TAB -->
+                <div id="research" class="tab-content space-y-4">
+                    <div class="mb-2">
+                        <h3 class="font-bold text-gray-800 text-sm tracking-tight mb-1">Scientific Validation</h3>
+                        <p class="text-xs text-gray-500 font-medium">Peer-reviewed studies proving efficacy.</p>
                     </div>
-                    <div class="bg-red-50 p-4 rounded-2xl border border-red-100">
-                        <h4 class="font-bold text-red-700 mb-1 text-xs"><i class="fas fa-exclamation-triangle mr-1"></i>
-                            Safety Precaution</h4>
-                        <p class="text-red-600 text-xs">Do not rely on this for severe asthma attacks. Consult a doctor
-                            if symptoms persist.</p>
+
+                    <!-- Study Card 1 -->
+                    <div
+                        class="bg-white p-5 rounded-[24px] shadow-soft border border-gray-100 tap-effect cursor-pointer group">
+                        <div class="flex justify-between items-start mb-3">
+                            <span
+                                class="bg-blue-50 text-blue-600 text-[9px] px-2 py-0.5 rounded font-bold uppercase tracking-widest">Clinical
+                                Trial</span>
+                            <span class="text-[10px] text-gray-400 font-medium">NIRPROMP</span>
+                        </div>
+                        <h4
+                            class="text-leaf-dark font-bold text-[13px] leading-tight mb-2 group-hover:text-leaf transition">
+                            Efficacy of Vitex negundo (Lagundi) in the treatment of acute cough</h4>
+                        <p class="text-[11px] text-gray-500 mb-4 leading-relaxed">Conducted by the National Integrated
+                            Research Program on Medicinal Plants, proving Lagundi is scientifically effective as a
+                            bronchodilator.</p>
+                        <div class="flex items-center text-leaf text-xs font-bold gap-1 group-hover:underline">
+                            Read Publication <i class="fas fa-external-link-alt text-[10px]"></i>
+                        </div>
+                    </div>
+
+                    <!-- Study Card 2 -->
+                    <div
+                        class="bg-white p-5 rounded-[24px] shadow-soft border border-gray-100 tap-effect cursor-pointer group">
+                        <div class="flex justify-between items-start mb-3">
+                            <span
+                                class="bg-purple-50 text-purple-600 text-[9px] px-2 py-0.5 rounded font-bold uppercase tracking-widest">Pharmacology</span>
+                            <span class="text-[10px] text-gray-400 font-medium">UP Manila</span>
+                        </div>
+                        <h4
+                            class="text-leaf-dark font-bold text-[13px] leading-tight mb-2 group-hover:text-leaf transition">
+                            Bronchodilator activity of Chrysoplenol D from Vitex negundo</h4>
+                        <p class="text-[11px] text-gray-500 mb-4 leading-relaxed">Identified Chrysoplenol D as the main
+                            active compound responsible for its powerful anti-histamine and muscle relaxant properties
+                            for asthma.</p>
+                        <div class="flex items-center text-leaf text-xs font-bold gap-1 group-hover:underline">
+                            Read Publication <i class="fas fa-external-link-alt text-[10px]"></i>
+                        </div>
+                    </div>
+
+                    <!-- Trust Badge -->
+                    <div
+                        class="bg-leaf-light/30 rounded-[20px] p-4 flex gap-3 items-center mt-2 border border-leaf-light/50">
+                        <div
+                            class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-leaf text-lg shadow-sm shrink-0">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <p class="text-[10px] text-leaf-dark font-medium leading-tight">These studies are verified by
+                            the Philippine Department of Health (DOH) and the University of the Philippines Manila.</p>
                     </div>
                 </div>
 
-                <!-- Compare Tab (The Magic Feature) -->
+                <!-- 3. COMPARE TAB -->
                 <div id="compare" class="tab-content">
                     <div class="mb-4">
                         <h3 class="font-bold text-gray-800 text-sm tracking-tight mb-1">Look-Alike Alert</h3>
@@ -209,12 +280,13 @@
 
                     <div class="relative flex py-4 items-center">
                         <div class="flex-grow border-t border-gray-300"></div>
-                        <span class="flex-shrink-0 mx-4 text-gray-400 text-xs font-medium">OR</span>
+                        <span
+                            class="flex-shrink-0 mx-4 text-gray-400 text-[10px] font-bold uppercase tracking-widest">OR</span>
                         <div class="flex-grow border-t border-gray-300"></div>
                     </div>
 
                     <button
-                        class="w-full bg-white border-2 border-leaf/30 text-leaf-dark font-bold rounded-2xl py-3.5 shadow-sm tap-effect flex items-center justify-center gap-2"
+                        class="w-full bg-white border-2 border-leaf-light text-leaf-dark font-bold rounded-2xl py-3.5 shadow-sm tap-effect flex items-center justify-center gap-2 text-sm"
                         onclick="window.location.href='library.html'">
                         <i class="fas fa-search"></i> Select plant from Library
                     </button>
@@ -230,26 +302,24 @@
 
     <script>
         function switchTab(tabId, btnElement) {
-            // Reset all buttons
+            // 1. Reset all buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.className = "tab-btn text-gray-500 rounded-full flex-1 py-2 text-xs font-semibold transition tap-effect";
+                btn.className = "tab-btn text-gray-500 rounded-full flex-1 py-2 text-[11px] font-semibold transition tap-effect";
             });
-            // Set active button
-            btnElement.className = "tab-btn active bg-leaf-dark text-white rounded-full flex-1 py-2 text-xs font-bold transition tap-effect";
 
-            // Re-apply special styles if Compare is clicked
+            // 2. Apply active style
             if (tabId === 'compare') {
-                btnElement.className = "tab-btn active bg-accent text-white rounded-full flex-1 py-2 text-xs font-bold transition tap-effect shadow-md flex items-center justify-center gap-1";
+                btnElement.className = "tab-btn active bg-accent text-white rounded-full flex-1 py-2 text-[11px] font-bold transition tap-effect shadow-md flex items-center justify-center gap-1";
                 btnElement.innerHTML = '<i class="fas fa-balance-scale text-[10px]"></i> Compare';
             } else {
-                // Restore the Compare button to idle state
+                btnElement.className = "tab-btn active bg-leaf-dark text-white rounded-full flex-1 py-2 text-[11px] font-bold transition tap-effect shadow-md";
                 const compareBtn = document.querySelector('button[onclick="switchTab(\'compare\', this)"]');
                 if (compareBtn && btnElement !== compareBtn) {
-                    compareBtn.className = "tab-btn text-accent bg-orange-50 rounded-full flex-1 py-2 text-xs font-bold transition tap-effect border border-orange-100 flex items-center justify-center gap-1";
+                    compareBtn.className = "tab-btn text-accent bg-orange-50 rounded-full flex-1 py-2 text-[11px] font-bold transition tap-effect border border-orange-100 flex items-center justify-center gap-1";
                 }
             }
 
-            // Switch content
+            // 3. Switch content
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
         }

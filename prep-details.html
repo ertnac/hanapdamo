@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KuHALAMAN - Preparation Steps</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config={theme:{extend:{colors:{'leaf-dark':'#243b27','leaf':'#4a7553','leaf-light':'#dce7df','earth':'#f5f6f2','accent':'#d66a43'},fontFamily:{sans:['Poppins','sans-serif'],serif:['Playfair Display','serif']}}}}
+    </script>
+    <style>
+        * { -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
+        .tap-effect:active { transform: scale(0.96); transition: transform 0.1s; }
+        .page-enter { animation: fadeSlide 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        @keyframes fadeSlide { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .shadow-soft { box-shadow: 0 10px 30px -5px rgba(36, 59, 39, 0.08); }
+    </style>
+</head>
+<body class="bg-gray-900 min-h-screen flex items-center justify-center py-10 font-sans">
+
+    <div class="relative w-[393px] h-[852px] bg-earth rounded-[50px] overflow-hidden shadow-2xl border-[8px] border-black flex flex-col page-enter">
+        
+        <!-- Status Bar -->
+        <div class="absolute top-0 w-full flex justify-between items-center px-8 pt-4 z-50 text-[15px] font-semibold tracking-tight text-gray-800 pointer-events-none">
+            <span>9:41</span><div class="flex space-x-2 items-center"><i class="fas fa-signal text-xs"></i><i class="fas fa-wifi text-xs"></i><i class="fas fa-battery-full text-sm"></i></div>
+        </div>
+
+        <!-- Header -->
+        <div class="pt-14 pb-4 px-6 flex items-center bg-earth relative z-40">
+            <!-- Back button explicitly goes back to preparation.html -->
+            <button class="tap-effect w-10 h-10 bg-white shadow-soft rounded-full flex items-center justify-center text-leaf-dark absolute left-6" onclick="window.location.href='preparation.html';">
+                <i class="fas fa-chevron-left text-xs"></i>
+            </button>
+            <h1 class="w-full text-center text-lg font-bold text-leaf-dark tracking-tight">Step-by-Step Guide</h1>
+        </div>
+
+        <div class="flex-1 overflow-y-auto no-scrollbar pb-32">
+            
+            <!-- Plant Profile Mini-Header -->
+            <div class="px-6 pt-4 pb-6">
+                <div class="bg-white rounded-[28px] p-4 shadow-soft flex gap-4 items-center">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBzIHpk8kLFkY-fK8ZgU9Ukz_LZicGRSFVWQ&s" class="w-20 h-20 rounded-[20px] object-cover shadow-sm">
+                    <div>
+                        <h2 class="font-serif font-bold text-leaf-dark text-2xl leading-none">Lagundi</h2>
+                        <p class="text-[11px] text-gray-400 italic mt-1 font-medium">Vitex negundo</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-6 space-y-6">
+                
+                <!-- Preparation 1 -->
+                <div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="bg-blue-100 text-blue-700 text-[10px] px-3 py-1.5 rounded-full font-bold uppercase tracking-widest flex items-center shadow-sm"><i class="fas fa-lungs mr-1.5"></i> For Cough & Asthma</span>
+                    </div>
+                    
+                    <div class="bg-white rounded-[28px] p-5 shadow-soft border border-white">
+                        <h3 class="text-leaf-dark font-bold text-sm mb-4 flex items-center"><i class="fas fa-mug-hot text-leaf mr-2 text-lg"></i> Method: Decoction (Tea)</h3>
+                        
+                        <!-- Steps -->
+                        <div class="space-y-4 relative before:absolute before:inset-0 before:ml-[15px] before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-leaf-light before:to-transparent">
+                            
+                            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full border-4 border-white bg-leaf text-white font-bold text-xs shadow-sm z-10">1</div>
+                                <div class="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] p-3 rounded-2xl bg-earth border border-gray-100">
+                                    <p class="text-xs font-medium text-gray-700">Wash <span class="font-bold text-leaf-dark">1/2 cup of fresh leaves</span> thoroughly under clean running water.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full border-4 border-white bg-leaf text-white font-bold text-xs shadow-sm z-10">2</div>
+                                <div class="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] p-3 rounded-2xl bg-earth border border-gray-100">
+                                    <p class="text-xs font-medium text-gray-700">Chop the leaves and place them in a pot with <span class="font-bold text-leaf-dark">2 cups of water</span>.</p>
+                                </div>
+                            </div>
+
+                            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full border-4 border-white bg-leaf text-white font-bold text-xs shadow-sm z-10">3</div>
+                                <div class="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] p-3 rounded-2xl bg-earth border border-gray-100">
+                                    <p class="text-xs font-medium text-gray-700">Bring to a boil, then lower the heat and simmer for <span class="font-bold text-leaf-dark">15 minutes</span> without the lid.</p>
+                                </div>
+                            </div>
+
+                            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full border-4 border-white bg-leaf text-white font-bold text-xs shadow-sm z-10">4</div>
+                                <div class="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] p-3 rounded-2xl bg-earth border border-gray-100">
+                                    <p class="text-xs font-medium text-gray-700">Let it cool, strain the leaves, and <span class="font-bold text-leaf-dark">drink 1/2 cup 3 times a day</span>.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mini Warning -->
+                        <div class="mt-5 bg-accent/5 rounded-2xl p-3 border border-accent/20 flex gap-2">
+                            <i class="fas fa-exclamation-triangle text-accent mt-0.5 text-xs"></i>
+                            <p class="text-[10px] text-accent/90 font-medium">Do not rely on this for severe asthma attacks. Seek immediate medical help if breathing worsens.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preparation 2 -->
+                <div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="bg-orange-100 text-orange-700 text-[10px] px-3 py-1.5 rounded-full font-bold uppercase tracking-widest flex items-center shadow-sm"><i class="fas fa-thermometer-half mr-1.5"></i> For Fever & Aches</span>
+                    </div>
+                    
+                    <div class="bg-white rounded-[28px] p-5 shadow-soft border border-white">
+                        <h3 class="text-leaf-dark font-bold text-sm mb-4 flex items-center"><i class="fas fa-bath text-leaf mr-2 text-lg"></i> Method: Aromatic Bath</h3>
+                        
+                        <div class="space-y-4 relative before:absolute before:inset-0 before:ml-[15px] before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-leaf-light before:to-transparent">
+                            
+                            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full border-4 border-white bg-leaf text-white font-bold text-xs shadow-sm z-10">1</div>
+                                <div class="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] p-3 rounded-2xl bg-earth border border-gray-100">
+                                    <p class="text-xs font-medium text-gray-700">Boil a <span class="font-bold text-leaf-dark">large handful of mature leaves</span> in a pot of water for 15 minutes.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full border-4 border-white bg-leaf text-white font-bold text-xs shadow-sm z-10">2</div>
+                                <div class="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] p-3 rounded-2xl bg-earth border border-gray-100">
+                                    <p class="text-xs font-medium text-gray-700">Mix the boiled leaf water with cool tap water to create a <span class="font-bold text-leaf-dark">lukewarm bath</span>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Floating Navbar -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-[90%] z-40">
+            <div class="bg-white/90 backdrop-blur-xl shadow-[0_20px_40px_-10px_rgba(36,59,39,0.15)] rounded-full h-16 flex justify-around items-center px-2 border border-white">
+                <a href="home.html" class="tap-effect flex flex-col items-center flex-1 text-gray-400 hover:text-leaf transition"><i class="fas fa-home text-lg"></i></a>
+                <a href="library.html" class="tap-effect flex flex-col items-center flex-1 text-gray-400 hover:text-leaf transition"><i class="fas fa-book-open text-lg"></i></a>
+                <div class="relative flex-1 flex justify-center">
+                    <a href="scan.html" class="tap-effect absolute -top-10 w-16 h-16 bg-gradient-to-tr from-leaf-dark to-leaf rounded-full shadow-[0_10px_20px_rgba(74,117,83,0.3)] flex items-center justify-center border-4 border-earth cursor-pointer"><i class="fas fa-camera text-white text-xl"></i></a>
+                </div>
+                <a href="history.html" class="tap-effect flex flex-col items-center flex-1 text-gray-400 hover:text-leaf transition"><i class="fas fa-history text-lg"></i></a>
+                <a href="profile.html" class="tap-effect flex flex-col items-center flex-1 text-gray-400 hover:text-leaf transition"><i class="far fa-user text-lg"></i></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

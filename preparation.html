@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KuHALAMAN - Preparation Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = { theme: { extend: { colors: { 'leaf-dark': '#243b27', 'leaf': '#4a7553', 'leaf-light': '#dce7df', 'earth': '#f5f6f2', 'accent': '#d66a43' }, fontFamily: { sans: ['Poppins', 'sans-serif'], serif: ['Playfair Display', 'serif'] } } } }
+    </script>
+    <style>
+        * {
+            -webkit-tap-highlight-color: transparent;
+            scroll-behavior: smooth;
+        }
+
+        .tap-effect:active {
+            transform: scale(0.96);
+            transition: transform 0.1s;
+        }
+
+        .page-enter {
+            animation: fadeSlide 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .shadow-soft {
+            box-shadow: 0 10px 30px -5px rgba(36, 59, 39, 0.08);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 min-h-screen flex items-center justify-center py-10 font-sans">
+
+    <!-- Device Frame -->
+    <div
+        class="relative w-[393px] h-[852px] bg-earth rounded-[50px] overflow-hidden shadow-2xl border-[8px] border-black flex flex-col page-enter">
+
+        <!-- Status Bar -->
+        <div
+            class="absolute top-0 w-full flex justify-between items-center px-8 pt-4 z-50 text-[15px] font-semibold tracking-tight text-gray-800 pointer-events-none">
+            <span>9:41</span>
+            <div class="flex space-x-2 items-center"><i class="fas fa-signal text-xs"></i><i
+                    class="fas fa-wifi text-xs"></i><i class="fas fa-battery-full text-sm"></i></div>
+        </div>
+
+        <!-- Header -->
+        <div class="pt-14 pb-4 px-6 flex items-center bg-earth relative z-40">
+            <button
+                class="tap-effect w-10 h-10 bg-white shadow-soft rounded-full flex items-center justify-center text-leaf-dark absolute left-6"
+                onclick="window.location.href='home.html';">
+                <i class="fas fa-chevron-left text-xs"></i>
+            </button>
+            <h1 class="w-full text-center text-lg font-bold text-leaf-dark tracking-tight">Preparation Guide</h1>
+        </div>
+
+        <div class="flex-1 overflow-y-auto no-scrollbar pb-32">
+
+            <!-- Search Section -->
+            <div class="px-6 pt-4">
+                <div class="relative focus-within:scale-[1.02] transition-transform">
+                    <!-- Live Search Input -->
+                    <input type="text" id="searchInput" onkeyup="filterPreps()"
+                        class="w-full bg-white rounded-full py-4 pl-12 pr-6 text-[13px] outline-none text-gray-700 placeholder-gray-400 shadow-soft font-medium border border-gray-100 focus:border-leaf"
+                        placeholder="Search plant or symptom (e.g. Cough)...">
+                    <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                </div>
+
+                <!-- Recent Searches Placeholders -->
+                <div class="mt-4 mb-2">
+                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-2">Recent Searches</p>
+                    <div class="flex gap-2 overflow-x-auto no-scrollbar">
+                        <button onclick="setSearch('Guava')"
+                            class="bg-gray-200 text-gray-600 px-3 py-1.5 rounded-full text-[10px] font-medium tap-effect flex items-center whitespace-nowrap"><i
+                                class="fas fa-history text-gray-400 mr-1.5"></i> Guava</button>
+                        <button onclick="setSearch('Cough')"
+                            class="bg-gray-200 text-gray-600 px-3 py-1.5 rounded-full text-[10px] font-medium tap-effect flex items-center whitespace-nowrap"><i
+                                class="fas fa-history text-gray-400 mr-1.5"></i> Cough</button>
+                        <button onclick="setSearch('Poultice')"
+                            class="bg-gray-200 text-gray-600 px-3 py-1.5 rounded-full text-[10px] font-medium tap-effect flex items-center whitespace-nowrap"><i
+                                class="fas fa-history text-gray-400 mr-1.5"></i> Poultice</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-6 pt-4">
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-3">Select to view steps</p>
+
+                <!-- Clean Cards Container -->
+                <div class="space-y-4" id="prepContainer">
+
+                    <!-- Plant 1: Lagundi (UPDATED LINK) -->
+                    <div class="prep-card bg-white rounded-[24px] p-3 shadow-soft border border-gray-100 flex gap-4 items-center cursor-pointer tap-effect group"
+                        onclick="window.location.href='prep-details.html'">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBzIHpk8kLFkY-fK8ZgU9Ukz_LZicGRSFVWQ&s"
+                            class="w-24 h-24 rounded-[16px] object-cover shadow-sm group-hover:scale-105 transition duration-300">
+                        <div class="flex-1 py-1">
+                            <h4 class="font-serif font-bold text-leaf-dark text-lg leading-none">Lagundi</h4>
+                            <p class="text-[10px] text-gray-400 italic mt-1">Vitex negundo</p>
+
+                            <!-- Methods -->
+                            <p class="text-[9px] text-gray-500 font-medium mt-2 mb-1">
+                                <i class="fas fa-flask text-leaf opacity-70"></i> Decoction, Bath
+                            </p>
+
+                            <!-- Remedies Tags -->
+                            <div class="flex flex-wrap gap-1">
+                                <span
+                                    class="bg-leaf-light/40 text-leaf text-[9px] px-2 py-0.5 rounded font-bold uppercase">Cough</span>
+                                <span
+                                    class="bg-leaf-light/40 text-leaf text-[9px] px-2 py-0.5 rounded font-bold uppercase">Asthma</span>
+                                <span
+                                    class="bg-leaf-light/40 text-leaf text-[9px] px-2 py-0.5 rounded font-bold uppercase">Fever</span>
+                            </div>
+                        </div>
+                        <div
+                            class="w-8 h-8 rounded-full bg-earth flex items-center justify-center text-leaf mr-1 group-hover:bg-leaf group-hover:text-white transition">
+                            <i class="fas fa-chevron-right text-[10px]"></i>
+                        </div>
+                    </div>
+
+                    <!-- Plant 2: Bayabas / Guava (UPDATED LINK) -->
+                    <div class="prep-card bg-white rounded-[24px] p-3 shadow-soft border border-gray-100 flex gap-4 items-center cursor-pointer tap-effect group"
+                        onclick="window.location.href='prep-details.html'">
+                        <img src="https://www.shutterstock.com/image-photo/green-leaves-guava-plant-nature-600nw-2530914341.jpg"
+                            class="w-24 h-24 rounded-[16px] object-cover shadow-sm group-hover:scale-105 transition duration-300">
+                        <div class="flex-1 py-1">
+                            <h4 class="font-serif font-bold text-leaf-dark text-lg leading-none">Bayabas</h4>
+                            <p class="text-[10px] text-gray-400 italic mt-1">Psidium guajava</p>
+
+                            <!-- Methods -->
+                            <p class="text-[9px] text-gray-500 font-medium mt-2 mb-1">
+                                <i class="fas fa-flask text-leaf opacity-70"></i> Antiseptic Wash, Tea
+                            </p>
+
+                            <!-- Remedies Tags -->
+                            <div class="flex flex-wrap gap-1">
+                                <span
+                                    class="bg-leaf-light/40 text-leaf text-[9px] px-2 py-0.5 rounded font-bold uppercase">Wounds</span>
+                                <span
+                                    class="bg-leaf-light/40 text-leaf text-[9px] px-2 py-0.5 rounded font-bold uppercase">Diarrhea</span>
+                            </div>
+                        </div>
+                        <div
+                            class="w-8 h-8 rounded-full bg-earth flex items-center justify-center text-leaf mr-1 group-hover:bg-leaf group-hover:text-white transition">
+                            <i class="fas fa-chevron-right text-[10px]"></i>
+                        </div>
+                    </div>
+
+                    <!-- Plant 3: Oregano (UPDATED LINK) -->
+                    <div class="prep-card bg-white rounded-[24px] p-3 shadow-soft border border-gray-100 flex gap-4 items-center cursor-pointer tap-effect group"
+                        onclick="window.location.href='prep-details.html'">
+                        <img src="https://bayanpalengke.com/wp-content/uploads/2022/01/Oregano-Leaf-Product-Pic.jpg"
+                            class="w-24 h-24 rounded-[16px] object-cover shadow-sm group-hover:scale-105 transition duration-300">
+                        <div class="flex-1 py-1">
+                            <h4 class="font-serif font-bold text-leaf-dark text-lg leading-none">Oregano</h4>
+                            <p class="text-[10px] text-gray-400 italic mt-1">Plectranthus amboinicus</p>
+
+                            <!-- Methods -->
+                            <p class="text-[9px] text-gray-500 font-medium mt-2 mb-1">
+                                <i class="fas fa-flask text-leaf opacity-70"></i> Extract (Juice), Poultice
+                            </p>
+
+                            <!-- Remedies Tags -->
+                            <div class="flex flex-wrap gap-1">
+                                <span
+                                    class="bg-leaf-light/40 text-leaf text-[9px] px-2 py-0.5 rounded font-bold uppercase">Cough</span>
+                                <span
+                                    class="bg-leaf-light/40 text-leaf text-[9px] px-2 py-0.5 rounded font-bold uppercase">Insect
+                                    Bites</span>
+                            </div>
+                        </div>
+                        <div
+                            class="w-8 h-8 rounded-full bg-earth flex items-center justify-center text-leaf mr-1 group-hover:bg-leaf group-hover:text-white transition">
+                            <i class="fas fa-chevron-right text-[10px]"></i>
+                        </div>
+                    </div>
+
+                    <!-- Empty State (Hidden by default) -->
+                    <div id="noResults" class="hidden text-center py-10">
+                        <div
+                            class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-3 text-gray-400 text-2xl">
+                            <i class="fas fa-search"></i></div>
+                        <h3 class="font-bold text-gray-700">No results found</h3>
+                        <p class="text-xs text-gray-500 mt-1">Try searching for a different symptom or plant.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Modern Bottom Navigation -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-[90%] z-40">
+            <div
+                class="bg-white/90 backdrop-blur-xl shadow-[0_20px_40px_-10px_rgba(36,59,39,0.15)] rounded-full h-16 flex justify-around items-center px-2 border border-white">
+                <a href="home.html"
+                    class="tap-effect flex flex-col items-center flex-1 text-gray-400 hover:text-leaf transition"><i
+                        class="fas fa-home text-lg"></i></a>
+                <a href="library.html"
+                    class="tap-effect flex flex-col items-center flex-1 text-gray-400 hover:text-leaf transition"><i
+                        class="fas fa-book-open text-lg"></i></a>
+                <div class="relative flex-1 flex justify-center">
+                    <a href="scan.html"
+                        class="tap-effect absolute -top-10 w-16 h-16 bg-gradient-to-tr from-leaf-dark to-leaf rounded-full shadow-[0_10px_20px_rgba(74,117,83,0.3)] flex items-center justify-center border-4 border-earth cursor-pointer"><i
+                            class="fas fa-camera text-white text-xl"></i></a>
+                </div>
+                <a href="history.html"
+                    class="tap-effect flex flex-col items-center flex-1 text-gray-400 hover:text-leaf transition"><i
+                        class="fas fa-history text-lg"></i></a>
+                <a href="profile.html"
+                    class="tap-effect flex flex-col items-center flex-1 text-gray-400 hover:text-leaf transition"><i
+                        class="far fa-user text-lg"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Search Script -->
+    <script>
+        function filterPreps() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.prep-card');
+            let hasResults = false;
+
+            cards.forEach(card => {
+                let textContent = card.innerText.toLowerCase();
+                if (textContent.includes(input)) {
+                    card.style.display = "flex";
+                    hasResults = true;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            if (hasResults) { document.getElementById('noResults').style.display = "none"; }
+            else { document.getElementById('noResults').style.display = "block"; }
+        }
+
+        function setSearch(term) {
+            document.getElementById('searchInput').value = term;
+            filterPreps();
+        }
+    </script>
+</body>
+
+</html>

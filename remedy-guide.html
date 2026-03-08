@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanap Damo - Remedy Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'leaf-dark': '#243b27',
+                        'leaf': '#4a7553',
+                        'leaf-light': '#dce7df',
+                        'earth': '#f5f6f2',
+                        'accent': '#d66a43'
+                    },
+                    fontFamily: { sans: ['Poppins', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
+        .tap-effect:active { transform: scale(0.96); transition: transform 0.1s; }
+        .page-enter { animation: fadeSlide 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        @keyframes fadeSlide { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .shadow-soft { box-shadow: 0 10px 30px -5px rgba(36, 59, 39, 0.08); }
+        
+        /* Active filter chip style */
+        .chip-active { background-color: #243b27 !important; color: white !important; border-color: #243b27 !important; }
+    </style>
+</head>
+
+<body class="bg-gray-900 min-h-screen flex items-center justify-center py-10 font-sans">
+
+    <div class="relative w-[393px] h-[852px] bg-earth rounded-[50px] overflow-hidden shadow-2xl border-[8px] border-black flex flex-col page-enter">
+
+        <!-- Status Bar -->
+        <div class="absolute top-0 w-full flex justify-between items-center px-8 pt-4 z-50 text-[15px] font-semibold tracking-tight text-gray-800 pointer-events-none">
+            <span>9:41</span>
+            <div class="flex space-x-2 items-center"><i class="fas fa-signal text-xs"></i><i class="fas fa-wifi text-xs"></i><i class="fas fa-battery-full text-sm"></i></div>
+        </div>
+
+        <!-- Header -->
+        <div class="pt-14 pb-2 px-6 flex items-center bg-earth relative z-40">
+            <button class="tap-effect w-10 h-10 bg-white shadow-soft rounded-full flex items-center justify-center text-leaf-dark absolute left-6" onclick="window.location.href='home.html';">
+                <i class="fas fa-chevron-left text-xs"></i>
+            </button>
+            <h1 class="w-full text-center text-lg font-bold text-leaf-dark tracking-tight">Remedy Guide</h1>
+        </div>
+
+        <div class="flex-1 overflow-y-auto no-scrollbar pb-32">
+
+            <!-- Filters Section -->
+            <div class="px-6 pt-5">
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-3">Find by category</p>
+                
+                <h2 class="text-sm font-bold text-leaf-dark mb-2">1. Filter by Symptom</h2>
+                <div class="flex gap-2 overflow-x-auto no-scrollbar pb-2 mb-2" id="symptomFilters">
+                    <button class="symp-chip chip-active bg-white text-gray-500 border border-gray-200 px-4 py-2 rounded-full text-xs font-semibold shadow-sm tap-effect whitespace-nowrap" onclick="setFilter('symptom', 'all', this)">All</button>
+                    <button class="symp-chip bg-white text-gray-500 border border-gray-200 px-4 py-2 rounded-full text-xs font-semibold shadow-sm tap-effect whitespace-nowrap" onclick="setFilter('symptom', 'cough', this)">Cough 🫁</button>
+                    <button class="symp-chip bg-white text-gray-500 border border-gray-200 px-4 py-2 rounded-full text-xs font-semibold shadow-sm tap-effect whitespace-nowrap" onclick="setFilter('symptom', 'stomach', this)">Stomach 🩺</button>
+                    <button class="symp-chip bg-white text-gray-500 border border-gray-200 px-4 py-2 rounded-full text-xs font-semibold shadow-sm tap-effect whitespace-nowrap" onclick="setFilter('symptom', 'wounds', this)">Wounds 🩹</button>
+                    <button class="symp-chip bg-white text-gray-500 border border-gray-200 px-4 py-2 rounded-full text-xs font-semibold shadow-sm tap-effect whitespace-nowrap" onclick="setFilter('symptom', 'diabetes', this)">Diabetes 🩸</button>
+                </div>
+
+                <h2 class="text-sm font-bold text-leaf-dark mb-2 mt-4">2. Filter by Preparation</h2>
+                <div class="flex gap-2 overflow-x-auto no-scrollbar pb-2 border-b border-gray-200 mb-2" id="prepFilters">
+                    <button class="prep-chip chip-active bg-white text-gray-500 border border-gray-200 px-4 py-2 rounded-full text-[11px] font-semibold shadow-sm tap-effect whitespace-nowrap" onclick="setFilter('prep', 'all', this)">All</button>
+                    <button class="prep-chip bg-white text-gray-500 border border-gray-200 px-4 py-2 rounded-full text-[11px] font-semibold shadow-sm tap-effect whitespace-nowrap" onclick="setFilter('prep', 'decoction', this)">Decoction (Tea) 🍵</button>
+                    <button class="prep-chip bg-white text-gray-500 border border-gray-200 px-4 py-2 rounded-full text-[11px] font-semibold shadow-sm tap-effect whitespace-nowrap" onclick="setFilter('prep', 'extract', this)">Extract (Juice) 💧</button>
+                    <button class="prep-chip bg-white text-gray-500 border border-gray-200 px-4 py-2 rounded-full text-[11px] font-semibold shadow-sm tap-effect whitespace-nowrap" onclick="setFilter('prep', 'poultice', this)">Poultice (Paste) 🍃</button>
+                </div>
+            </div>
+
+            <!-- RESULTS LIST -->
+            <div class="px-6 pt-4 space-y-4" id="resultsContainer">
+
+                <!-- Card 1: Lagundi -->
+                <!-- Redirects directly to plant-details.html -->
+                <div class="remedy-card bg-white rounded-[24px] p-3 shadow-soft border border-gray-100 flex gap-4 items-center cursor-pointer tap-effect group" data-symptom="cough" data-prep="decoction" onclick="window.location.href='prep-details.html'">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBzIHpk8kLFkY-fK8ZgU9Ukz_LZicGRSFVWQ&s" class="w-24 h-24 rounded-[16px] object-cover shadow-sm group-hover:scale-105 transition duration-300">
+                    <div class="flex-1 py-1">
+                        <h4 class="font-bold text-leaf-dark text-lg leading-none">Lagundi</h4>
+                        <p class="text-[10px] text-gray-400 italic mt-1">Vitex negundo</p>
+                        
+                        <!-- Prep Subtext -->
+                        <p class="text-[9px] text-gray-500 font-medium mt-2 mb-1">
+                            <i class="fas fa-flask text-leaf opacity-70 mr-1"></i>Decoction (Tea), Bath
+                        </p>
+                        
+                        <!-- Symptom Tags -->
+                        <div class="flex flex-wrap gap-1">
+                            <span class="bg-blue-50 text-blue-600 text-[9px] px-2 py-0.5 rounded font-bold uppercase">Cough</span>
+                            <span class="bg-blue-50 text-blue-600 text-[9px] px-2 py-0.5 rounded font-bold uppercase">Asthma</span>
+                        </div>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-earth flex items-center justify-center text-leaf mr-1 group-hover:bg-leaf group-hover:text-white transition">
+                        <i class="fas fa-chevron-right text-[10px]"></i>
+                    </div>
+                </div>
+
+                <!-- Card 2: Tsaang Gubat -->
+                <!-- Redirects directly to plant-details.html -->
+                <div class="remedy-card bg-white rounded-[24px] p-3 shadow-soft border border-gray-100 flex gap-4 items-center cursor-pointer tap-effect group" data-symptom="stomach" data-prep="decoction" onclick="window.location.href='prep-details.html'">
+                    <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="w-24 h-24 rounded-[16px] object-cover shadow-sm group-hover:scale-105 transition duration-300">
+                    <div class="flex-1 py-1">
+                        <h4 class="font-bold text-leaf-dark text-lg leading-none">Tsaang Gubat</h4>
+                        <p class="text-[10px] text-gray-400 italic mt-1">Carmona retusa</p>
+                        
+                        <!-- Prep Subtext -->
+                        <p class="text-[9px] text-gray-500 font-medium mt-2 mb-1">
+                            <i class="fas fa-flask text-leaf opacity-70 mr-1"></i>Decoction (Tea)
+                        </p>
+                        
+                        <!-- Symptom Tags -->
+                        <div class="flex flex-wrap gap-1">
+                            <span class="bg-orange-50 text-orange-600 text-[9px] px-2 py-0.5 rounded font-bold uppercase">Stomach Ache</span>
+                        </div>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-earth flex items-center justify-center text-leaf mr-1 group-hover:bg-leaf group-hover:text-white transition">
+                        <i class="fas fa-chevron-right text-[10px]"></i>
+                    </div>
+                </div>
+
+                <!-- Card 3: Oregano -->
+                <!-- Redirects directly to plant-details.html -->
+                <div class="remedy-card bg-white rounded-[24px] p-3 shadow-soft border border-gray-100 flex gap-4 items-center cursor-pointer tap-effect group" data-symptom="cough" data-prep="extract" onclick="window.location.href='prep-details.html'">
+                    <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="w-24 h-24 rounded-[16px] object-cover shadow-sm group-hover:scale-105 transition duration-300">
+                    <div class="flex-1 py-1">
+                        <h4 class="font-bold text-leaf-dark text-lg leading-none">Oregano</h4>
+                        <p class="text-[10px] text-gray-400 italic mt-1">Plectranthus amboinicus</p>
+                        
+                        <!-- Prep Subtext -->
+                        <p class="text-[9px] text-gray-500 font-medium mt-2 mb-1">
+                            <i class="fas fa-flask text-leaf opacity-70 mr-1"></i>Extract (Juice), Poultice
+                        </p>
+                        
+                        <!-- Symptom Tags -->
+                        <div class="flex flex-wrap gap-1">
+                            <span class="bg-blue-50 text-blue-600 text-[9px] px-2 py-0.5 rounded font-bold uppercase">Cough</span>
+                            <span class="bg-purple-50 text-purple-600 text-[9px] px-2 py-0.5 rounded font-bold uppercase">Insect Bites</span>
+                        </div>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-earth flex items-center justify-center text-leaf mr-1 group-hover:bg-leaf group-hover:text-white transition">
+                        <i class="fas fa-chevron-right text-[10px]"></i>
+                    </div>
+                </div>
+
+                <!-- Card 4: Ampalaya -->
+                <!-- Redirects directly to plant-details.html -->
+                <div class="remedy-card bg-white rounded-[24px] p-3 shadow-soft border border-gray-100 flex gap-4 items-center cursor-pointer tap-effect group" data-symptom="diabetes" data-prep="decoction" onclick="window.location.href='prep-details.html'">
+                    <img src="https://www.upm.edu.ph/wp-content/uploads/2024/09/Ampalaya1-scaled.jpg" class="w-24 h-24 rounded-[16px] object-cover shadow-sm group-hover:scale-105 transition duration-300">
+                    <div class="flex-1 py-1">
+                        <h4 class="font-bold text-leaf-dark text-lg leading-none">Ampalaya</h4>
+                        <p class="text-[10px] text-gray-400 italic mt-1">Momordica charantia</p>
+                        
+                        <!-- Prep Subtext -->
+                        <p class="text-[9px] text-gray-500 font-medium mt-2 mb-1">
+                            <i class="fas fa-flask text-leaf opacity-70 mr-1"></i>Decoction (Tea)
+                        </p>
+                        
+                        <!-- Symptom Tags -->
+                        <div class="flex flex-wrap gap-1">
+                            <span class="bg-red-50 text-red-600 text-[9px] px-2 py-0.5 rounded font-bold uppercase">Diabetes</span>
+                        </div>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-earth flex items-center justify-center text-leaf mr-1 group-hover:bg-leaf group-hover:text-white transition">
+                        <i class="fas fa-chevron-right text-[10px]"></i>
+                    </div>
+                </div>
+
+                <!-- Empty State -->
+                <div id="noResults" class="hidden text-center py-10">
+                    <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-3 text-gray-400 text-2xl"><i class="fas fa-search"></i></div>
+                    <h3 class="font-bold text-gray-700">No exact matches</h3>
+                    <p class="text-xs text-gray-500 mt-1">Try changing your symptom or preparation filters.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Floating Navbar -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-[90%] z-40">
+            <div class="bg-white/90 backdrop-blur-xl shadow-[0_20px_40px_-10px_rgba(36,59,39,0.15)] rounded-full h-16 flex justify-around items-center px-2 border border-white">
+                <a href="home.html" class="tap-effect flex flex-col items-center flex-1 text-gray-400 hover:text-leaf transition"><i class="fas fa-home text-lg"></i></a>
+                <a href="library.html" class="tap-effect flex flex-col items-center flex-1 text-gray-400 hover:text-leaf transition"><i class="fas fa-book-open text-lg"></i></a>
+                <div class="relative flex-1 flex justify-center">
+                    <a href="scan.html" class="tap-effect absolute -top-10 w-16 h-16 bg-gradient-to-tr from-leaf-dark to-leaf rounded-full shadow-[0_10px_20px_rgba(74,117,83,0.3)] flex items-center justify-center border-4 border-earth cursor-pointer"><i class="fas fa-camera text-white text-xl"></i></a>
+                </div>
+                <a href="history.html" class="tap-effect flex flex-col items-center flex-1 text-gray-400 hover:text-leaf transition"><i class="fas fa-history text-lg"></i></a>
+                <a href="profile.html" class="tap-effect flex flex-col items-center flex-1 text-gray-400 hover:text-leaf transition"><i class="far fa-user text-lg"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dual Filter Logic -->
+    <script>
+        let currentSymptom = 'all';
+        let currentPrep = 'all';
+
+        function setFilter(type, value, btnElement) {
+            // Update UI buttons
+            if (type === 'symptom') {
+                currentSymptom = value;
+                document.querySelectorAll('.symp-chip').forEach(btn => btn.classList.remove('chip-active'));
+                btnElement.classList.add('chip-active');
+            } else if (type === 'prep') {
+                currentPrep = value;
+                document.querySelectorAll('.prep-chip').forEach(btn => btn.classList.remove('chip-active'));
+                btnElement.classList.add('chip-active');
+            }
+
+            // Filter logic
+            let cards = document.querySelectorAll('.remedy-card');
+            let hasResults = false;
+
+            cards.forEach(card => {
+                let matchSymptom = (currentSymptom === 'all' || card.getAttribute('data-symptom') === currentSymptom);
+                let matchPrep = (currentPrep === 'all' || card.getAttribute('data-prep') === currentPrep);
+
+                if (matchSymptom && matchPrep) {
+                    card.style.display = "flex"; // Horizontal layout
+                    hasResults = true;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            // Show empty state if no matches
+            document.getElementById('noResults').style.display = hasResults ? "none" : "block";
+        }
+    </script>
+</body>
+</html>

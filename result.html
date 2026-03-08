@@ -4,12 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hanap Damo - Plant Identified</title>
+    <title>KuHALAMAN - Plant Identified</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    <!-- Restored Poppins and Playfair Display fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <script>tailwind.config = { theme: { extend: { colors: { 'brand-green': '#8FBC63', 'brand-dark': '#295C14', 'brand-light': '#6D9741', 'card-green': '#A1C37A', 'card-bg': '#F8F9F5', 'bg-light': '#F4F6F0' }, fontFamily: { sans: ['Inter', 'sans-serif'] } } } }</script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'leaf-dark': '#243b27',
+                        'leaf': '#4a7553',
+                        'leaf-light': '#dce7df',
+                        'earth': '#f5f6f2',
+                        'accent': '#d66a43'
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         * {
             -webkit-tap-highlight-color: transparent;
@@ -17,18 +38,18 @@
         }
 
         .tap-effect:active {
-            transform: scale(0.95);
+            transform: scale(0.96);
             transition: transform 0.1s;
         }
 
         .page-enter {
-            animation: slideInUp 0.3s ease-out forwards;
+            animation: fadeSlide 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
 
-        @keyframes slideInUp {
+        @keyframes fadeSlide {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(15px);
             }
 
             to {
@@ -46,7 +67,11 @@
             scrollbar-width: none;
         }
 
-        /* Tab Transition */
+        .shadow-soft {
+            box-shadow: 0 10px 30px -5px rgba(36, 59, 39, 0.08);
+        }
+
+        /* Tab Transitions */
         .tab-content {
             display: none;
             animation: fadeIn 0.3s ease;
@@ -73,116 +98,141 @@
 <body class="bg-gray-900 min-h-screen flex items-center justify-center py-10 font-sans">
 
     <div
-        class="relative w-[393px] h-[852px] bg-white rounded-[50px] overflow-hidden shadow-2xl border-[8px] border-black flex flex-col page-enter">
-        <div
-            class="absolute top-0 inset-x-0 h-14 bg-gradient-to-b from-black/20 to-transparent z-50 pointer-events-none">
-        </div>
+        class="relative w-[393px] h-[852px] bg-earth rounded-[50px] overflow-hidden shadow-2xl border-[8px] border-black flex flex-col page-enter">
 
-        <!-- Status Bar Mockup -->
+        <!-- Status Bar -->
         <div
-            class="absolute top-0 w-full flex justify-between items-center px-8 pt-4 z-50 text-[15px] font-semibold tracking-tight text-gray-800 pointer-events-none">
+            class="absolute top-0 w-full flex justify-between items-center px-8 pt-4 z-50 text-[15px] font-semibold tracking-tight text-white drop-shadow-md pointer-events-none">
             <span>9:41</span>
             <div class="flex space-x-2 items-center"><i class="fas fa-signal text-xs"></i><i
                     class="fas fa-wifi text-xs"></i><i class="fas fa-battery-full text-sm"></i></div>
         </div>
 
-        <!-- Header -->
-        <div class="pt-14 pb-4 px-6 flex items-center bg-white relative z-40">
+        <!-- Split Hero Image Header -->
+        <div class="h-[40%] w-full flex relative shrink-0">
+            <!-- Back Button -->
             <button
-                class="tap-effect w-10 h-10 bg-white shadow-md border border-gray-100 rounded-xl flex items-center justify-center text-gray-600 absolute left-6"
+                class="absolute top-14 left-6 z-50 w-10 h-10 bg-black/30 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/20 tap-effect"
                 onclick="window.location.href='home.html';">
                 <i class="fas fa-chevron-left text-sm"></i>
             </button>
-            <h1 class="w-full text-center text-2xl font-semibold text-brand-dark tracking-tight">Plant Identified!</h1>
+
+            <!-- Success Badge -->
+            <div class="absolute top-14 inset-x-0 flex justify-center z-40 pointer-events-none">
+                <span
+                    class="bg-leaf text-white text-[11px] px-4 py-1.5 rounded-full font-bold tracking-widest uppercase shadow-lg flex items-center gap-1.5 border border-white/20">
+                    <i class="fas fa-check-circle"></i> Match Found
+                </span>
+            </div>
+
+            <!-- User Scan -->
+            <div class="w-1/2 h-full relative border-r-2 border-white bg-black">
+                <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                    class="w-full h-full object-cover opacity-90">
+                <div class="absolute bottom-12 inset-x-0 flex justify-center">
+                    <span
+                        class="bg-black/40 backdrop-blur-md text-white text-[9px] font-bold tracking-widest uppercase px-3 py-1 rounded-full border border-white/20">Your
+                        Scan</span>
+                </div>
+            </div>
+
+            <!-- Reference Image -->
+            <div class="w-1/2 h-full relative bg-black">
+                <img src="https://images.unsplash.com/photo-1587334274328-64186a80aeb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                    class="w-full h-full object-cover opacity-90">
+                <div class="absolute bottom-12 inset-x-0 flex justify-center">
+                    <span
+                        class="bg-black/40 backdrop-blur-md text-white text-[9px] font-bold tracking-widest uppercase px-3 py-1 rounded-full border border-white/20">Reference</span>
+                </div>
+            </div>
         </div>
 
-        <!-- Scrollable Content -->
-        <div class="flex-1 overflow-y-auto no-scrollbar bg-white">
+        <!-- Overlapping Content -->
+        <div
+            class="flex-1 min-h-0 bg-earth -mt-10 rounded-t-[40px] relative z-20 flex flex-col shadow-[0_-10px_40px_rgba(0,0,0,0.1)]">
 
-            <!-- Side-by-Side Images -->
-            <div class="flex h-56 w-full relative">
-                <!-- User Scan -->
-                <div class="w-1/2 h-full relative border-r-2 border-white">
-                    <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                        class="w-full h-full object-cover">
-                    <div class="absolute top-3 inset-x-0 flex justify-center">
-                        <span class="text-white text-[10px] font-bold tracking-widest uppercase drop-shadow-md">Your
-                            Scan</span>
-                    </div>
-                </div>
-                <!-- Reference Image -->
-                <div class="w-1/2 h-full relative">
-                    <img src="https://images.unsplash.com/photo-1587334274328-64186a80aeb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                        class="w-full h-full object-cover">
-                    <div class="absolute top-3 inset-x-0 flex justify-center">
-                        <span
-                            class="text-white text-[10px] font-bold tracking-widest uppercase drop-shadow-md">Reference</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Overlapping Title Card -->
-            <div
-                class="-mt-8 relative z-10 bg-white rounded-t-[30px] pt-6 pb-4 text-center border-b-[3px] border-brand-dark/20">
-                <h2 class="text-3xl font-bold text-gray-900 tracking-tight">Oregano</h2>
-                <p class="text-gray-500 text-sm font-medium italic mt-0.5">Origanum vulgare</p>
-
-                <!-- Floating Save Button -->
+            <!-- Title & Floating Save Button -->
+            <div class="px-6 pt-8 pb-4 relative shrink-0">
                 <button
-                    class="absolute -top-6 right-6 w-12 h-12 bg-brand-dark text-white rounded-full shadow-lg flex items-center justify-center text-xl tap-effect hover:scale-105 transition"
-                    onclick="this.innerHTML='<i class=\'fas fa-check\'></i>'; this.classList.add('bg-brand-green'); alert('Saved to Library!');">
+                    class="absolute -top-7 right-6 w-14 h-14 bg-leaf-dark text-white rounded-full shadow-lg flex items-center justify-center text-xl tap-effect border-4 border-earth transition-colors duration-300"
+                    onclick="this.innerHTML='<i class=\'fas fa-check\'></i>'; this.classList.replace('bg-leaf-dark', 'bg-leaf'); alert('Saved to Library!');">
                     <i class="far fa-bookmark"></i>
                 </button>
+
+                <h1 class="text-3xl font-serif font-bold text-leaf-dark leading-tight">Oregano</h1>
+                <p class="text-gray-500 italic text-sm mt-0.5">Origanum vulgare</p>
             </div>
 
-            <!-- Tab Navigation (Pill styled like image) -->
-            <div class="px-4 py-4">
-                <div class="bg-gray-100 p-1 rounded-full flex justify-between shadow-inner">
+            <!-- Tab Navigation -->
+            <div class="px-6 mb-4 shrink-0">
+                <div
+                    class="flex overflow-x-auto gap-1 no-scrollbar bg-white p-1 rounded-full shadow-soft border border-gray-100">
                     <button
-                        class="tab-btn flex-1 py-2 text-xs font-bold text-gray-500 rounded-full transition tap-effect"
+                        class="tab-btn text-gray-500 rounded-full flex-1 py-2 text-[11px] font-semibold transition tap-effect"
                         onclick="switchTab('overview', this)">Overview</button>
                     <button
-                        class="tab-btn active flex-1 py-2 text-xs font-bold bg-brand-dark text-white rounded-full shadow-md transition tap-effect"
+                        class="tab-btn active bg-leaf-dark text-white rounded-full flex-1 py-2 text-[11px] font-bold transition tap-effect shadow-md"
                         onclick="switchTab('medicinal', this)">Medicinal Uses</button>
                     <button
-                        class="tab-btn flex-1 py-2 text-xs font-bold text-gray-500 rounded-full transition tap-effect"
+                        class="tab-btn text-gray-500 rounded-full flex-1 py-2 text-[11px] font-semibold transition tap-effect"
                         onclick="switchTab('cultivation', this)">Cultivation</button>
                 </div>
             </div>
 
-            <!-- Tab Contents -->
-            <div class="px-6 pb-10 text-gray-700 text-[13px] leading-relaxed font-medium">
+            <!-- Tab Contents (Scrollable area) -->
+            <div class="px-6 flex-1 min-h-0 overflow-y-auto no-scrollbar pb-10">
 
                 <!-- Overview Tab -->
-                <div id="overview" class="tab-content">
-                    <p>Oregano is a fragrant, bushy perennial herb native to the Mediterranean region. It is widely
-                        recognized for its strong, earthy flavor and is a staple in many culinary traditions.</p>
-                    <p class="mt-4">Beyond the kitchen, it has been used for centuries in traditional medicine due to
-                        its high concentration of antioxidants and potent essential oils.</p>
+                <div id="overview" class="tab-content space-y-4">
+                    <div class="bg-white p-5 rounded-[28px] shadow-soft border border-gray-100">
+                        <h4 class="font-bold text-leaf-dark mb-2 text-xs uppercase tracking-wider"><i
+                                class="fas fa-seedling text-leaf mr-1"></i> About</h4>
+                        <p class="text-[12px] text-gray-600 leading-relaxed font-medium">Oregano is a fragrant, bushy
+                            perennial herb native to the Mediterranean region. It is widely recognized for its strong,
+                            earthy flavor and is a staple in many culinary traditions.</p>
+                        <p class="text-[12px] text-gray-600 leading-relaxed font-medium mt-3">Beyond the kitchen, it has
+                            been used for centuries in traditional medicine due to its high concentration of
+                            antioxidants and potent essential oils.</p>
+                    </div>
                 </div>
 
-                <!-- Medicinal Uses Tab (Active by default, text copied from your image) -->
-                <div id="medicinal" class="tab-content active">
-                    <p>Medicinal Uses: Oregano is highly valued for its versatile medicinal applications. Traditionally,
-                        its leaves are boiled into a warm tea or extract to provide respiratory relief, helping to
-                        soothe coughs, colds, sore throats, and asthma.</p>
-                    <p class="mt-4">Furthermore, the plant contains active compounds like carvacrol and thymol that
-                        offer strong antimicrobial properties, assisting the body in fighting off bacterial and fungal
-                        infections.</p>
-                    <p class="mt-4">Beyond respiratory and immune support, consuming oregano also acts as an effective
-                        digestive aid to help relieve common issues such as bloating, indigestion, and upset stomachs.
-                    </p>
+                <!-- Medicinal Uses Tab (Active by default) -->
+                <div id="medicinal" class="tab-content active space-y-4">
+                    <div class="bg-white p-5 rounded-[28px] shadow-soft border border-gray-100">
+                        <h4 class="font-bold text-leaf-dark mb-2 text-xs uppercase tracking-wider"><i
+                                class="fas fa-heartbeat text-leaf mr-1"></i> Health Benefits</h4>
+                        <p class="text-[12px] text-gray-600 leading-relaxed font-medium">Oregano is highly valued for
+                            its versatile medicinal applications. Traditionally, its leaves are boiled into a warm tea
+                            or extract to provide respiratory relief, helping to soothe coughs, colds, sore throats, and
+                            asthma.</p>
+                        <p class="text-[12px] text-gray-600 leading-relaxed font-medium mt-3">Furthermore, the plant
+                            contains active compounds like carvacrol and thymol that offer strong antimicrobial
+                            properties, assisting the body in fighting off bacterial and fungal infections.</p>
+                        <p class="text-[12px] text-gray-600 leading-relaxed font-medium mt-3">Beyond respiratory and
+                            immune support, consuming oregano also acts as an effective digestive aid to help relieve
+                            common issues such as bloating, indigestion, and upset stomachs.</p>
+                    </div>
                 </div>
 
                 <!-- Cultivation Tab -->
-                <div id="cultivation" class="tab-content">
-                    <p>Oregano thrives in full sun and well-drained soil. It is a highly resilient plant that is
-                        drought-tolerant once established, making it very easy to grow in tropical climates like the
-                        Philippines.</p>
-                    <p class="mt-4"><strong class="text-gray-900">Watering:</strong> Only water when the top inch of
-                        soil is completely dry. Overwatering can cause root rot.</p>
-                    <p class="mt-4"><strong class="text-gray-900">Harvesting:</strong> Regular trimming encourages
-                        bushier growth. For maximum medicinal potency, harvest leaves just before the plant blooms.</p>
+                <div id="cultivation" class="tab-content space-y-4">
+                    <div class="bg-white p-5 rounded-[28px] shadow-soft border border-gray-100">
+                        <h4 class="font-bold text-leaf-dark mb-2 text-xs uppercase tracking-wider"><i
+                                class="fas fa-sun text-leaf mr-1"></i> Growing Guide</h4>
+                        <p class="text-[12px] text-gray-600 leading-relaxed font-medium">Oregano thrives in full sun and
+                            well-drained soil. It is a highly resilient plant that is drought-tolerant once established,
+                            making it very easy to grow in tropical climates like the Philippines.</p>
+                        <div class="mt-4 bg-earth p-3 rounded-[16px] border border-leaf-light/50">
+                            <p class="text-[11px] text-gray-700 leading-relaxed font-medium"><strong
+                                    class="text-leaf-dark">Watering:</strong> Only water when the top inch of soil is
+                                completely dry. Overwatering can cause root rot.</p>
+                        </div>
+                        <div class="mt-2 bg-earth p-3 rounded-[16px] border border-leaf-light/50">
+                            <p class="text-[11px] text-gray-700 leading-relaxed font-medium"><strong
+                                    class="text-leaf-dark">Harvesting:</strong> Regular trimming encourages bushier
+                                growth. For maximum medicinal potency, harvest leaves just before the plant blooms.</p>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -198,10 +248,10 @@
         function switchTab(tabId, btnElement) {
             // Remove active classes from all buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.className = "tab-btn flex-1 py-2 text-xs font-bold text-gray-500 rounded-full transition tap-effect";
+                btn.className = "tab-btn text-gray-500 rounded-full flex-1 py-2 text-[11px] font-semibold transition tap-effect";
             });
             // Add active class to clicked button
-            btnElement.className = "tab-btn active flex-1 py-2 text-xs font-bold bg-brand-dark text-white rounded-full shadow-md transition tap-effect";
+            btnElement.className = "tab-btn active bg-leaf-dark text-white rounded-full flex-1 py-2 text-[11px] font-bold transition tap-effect shadow-md";
 
             // Hide all contents
             document.querySelectorAll('.tab-content').forEach(content => {
